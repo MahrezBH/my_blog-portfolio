@@ -1,0 +1,45 @@
+{% extends "portfolio/base.html" %}
+{% block content %}
+{% for post in posts %}
+
+<article class="examples">
+
+  <div class="intro">
+    <a href="{% url 'post-detail' post.slug %}" style="text-decoration: none;">
+      <h1> {{ post.title }}</h1>
+    </a>
+    <p>
+      {{ post.header }}
+    </p>
+  </div>
+
+  <small class="outro">on {{ post.date_posted | date:' d-m-Y'}}</a></small>
+</article>
+{% endfor %}
+{% if posts.has_other_pages %}
+<ul class="pagination">
+  {% if posts.has_previous %}
+  <a href="?page={{ posts.previous_page_number }}">
+    <li> &laquo; </li>
+  </a>
+  {% else %}
+  {% endif %}
+  {% for i in posts.paginator.page_range %}
+  {% if posts.number == i %}
+  <li class="active">{{ i }} </li>
+  {% else %}
+  <a class="noDecoration" href="?page={{ i }}">
+    <li>{{ i }}</li>
+  </a>
+  {% endif %}
+  {% endfor %}
+  {% if posts.has_next %}
+  <a href="?page={{ posts.next_page_number }}">
+    <li>&raquo;</li>
+  </a>
+  {% else %}
+  {% endif %}
+</ul>
+
+{% endif %}
+{% endblock content %}

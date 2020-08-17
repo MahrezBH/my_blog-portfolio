@@ -1,0 +1,21 @@
+{% extends "portfolio/base.html" %}
+{% block content %}
+<article class="examples">
+
+  <div class="intro">
+    <a href="{% url 'post-detail' post.slug %}" style="text-decoration: none;">
+      <h1> {{ post.title }}</h1>
+    </a>
+    <p>
+      {{ post.header }}
+    </p>
+    <p>
+      {{ post.description | safe}}
+    </p>
+  </div>
+
+  <small class="outro">on {{ post.date_posted | date:' d-m-Y'}}</a></small>
+
+</article>
+
+{% endblock content %}
